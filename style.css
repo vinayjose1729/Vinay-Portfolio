@@ -367,11 +367,66 @@ h1, h2, h3, .logo {
     border-color: var(--primary);
 }
 
-/* Responsive */
-@media (max-width: 968px) {
-    .hero-container { grid-template-columns: 1fr; text-align: center; }
-    .hero-text h1 { font-size: 3.5rem; }
-    .hero-image { max-width: 100%; }
-    .nav-links { display: none; }
-    .float-card { display: none; }
+/* Responsive Refinements */
+@media (max-width: 1024px) {
+    .hero-text h1 { font-size: 4.5rem; }
+    .project-card { padding: 2rem; gap: 2rem; }
+}
+
+@media (max-width: 768px) {
+    body { cursor: default; }
+    .custom-cursor, .cursor-follower { display: none; }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .hero-container { grid-template-columns: 1fr; text-align: center; padding-top: 4rem; }
+    .hero-text h1 { font-size: 3.2rem; }
+    .hero-text h2 { font-size: 1.2rem; }
+    .hero-subtitle { margin: 0 auto 2rem auto; }
+    .hero-actions { flex-direction: column; gap: 1.5rem; }
+    .hero-image { width: 100%; margin-top: 2rem; }
+    
+    .section-title { font-size: 2.5rem; text-align: center; }
+    .glass-card { padding: 2rem; }
+    
+    .horizontal-content { width: 100%; height: auto; flex-direction: column; }
+    .project-slide { width: 100%; height: auto; padding: 5rem 1.5rem; }
+    .project-card { grid-template-columns: 1fr; text-align: center; }
+    .project-card div:last-child { height: 250px; }
+    .project-info h3 { font-size: 2.2rem !important; }
+    
+    .nav-btn { display: none; }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 { font-size: 2.8rem; }
+    .section-title { font-size: 2.2rem; }
+}
+
+.menu-toggle {
+    display: none;
+    color: var(--text-main);
 }

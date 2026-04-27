@@ -46,6 +46,29 @@ window.addEventListener('load', () => {
     }, 40);
 });
 
+// Mobile Menu Toggle
+const menuToggle = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.toggle('fa-bars-staggered');
+        icon.classList.toggle('fa-xmark');
+    });
+}
+
+// Close menu when link is clicked
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.add('fa-bars-staggered');
+        icon.classList.remove('fa-xmark');
+    });
+});
+
 function initAnimations() {
     // Hero Animations
     const tl = gsap.timeline();
@@ -98,19 +121,27 @@ function initAnimations() {
         });
     });
 
-    // Horizontal Scroll for Projects
+    // Horizontal Scroll for Projects (Desktop only)
     const sections = gsap.utils.toArray('.project-slide');
     const projectSection = document.querySelector('.horizontal-container');
     const horizontalContent = document.querySelector('.horizontal-content');
 
-    gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1),
-        ease: "none",
-        scrollTrigger: {
-            trigger: projectSection,
-            pin: true,
-            scrub: 1,
-            end: () => "+=" + horizontalContent.offsetWidth
+    ScrollTrigger.matchMedia({
+        "(min-width: 769px)": function() {
+            gsap.to(sections, {
+                xPercent: -100 * (sections.length - 1),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: projectSection,
+                    pin: true,
+                    scrub: 1,
+                    end: () => "+=" + horizontalContent.offsetWidth
+                }
+            });
+        },
+        "(max-width: 768px)": function() {
+            // Horizontal container becomes normal vertical flow on mobile
+            gsap.set(sections, { xPercent: 0 });
         }
     });
 
